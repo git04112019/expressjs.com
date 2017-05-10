@@ -1,3 +1,8 @@
+/*
+ Copyright (c) 2016 StrongLoop, IBM, and Express Contributors
+ License: MIT
+*/
+
 /* general */
 
 * {
@@ -40,7 +45,8 @@ p em {
 }
 
 p {
-  margin: 20px 0;
+  margin: 10px 0;
+  line-height: 1.35em;
 }
 
 strong, th {
@@ -63,6 +69,62 @@ strong, th {
   margin: 120px 0 2% 5%;
   max-width: 900px;
   padding-right: 9%;
+  display: flex;
+}
+
+#homepage-leftpane {
+  min-width: 500px;
+  margin-right: 30px;
+  font-size: 90%;
+  padding-top: 13px;
+}
+
+#homepage-rightpane {
+  min-width: 500px;
+  padding: 25px 30px 0px 0px;
+}
+
+#homepage-rightpane iframe {
+  min-width: 100%;
+  min-height: 273px;
+}
+
+#announcements {
+  margin: 3px 5% 32px;
+  max-width: 1005px;
+  padding: 0 16px;
+  background: #fdfae6;
+  border: 1px solid #ebdbb7;
+  border-radius: 3px;
+  font-size: 0.9em;
+}
+
+#announcements ul {
+  padding-left: 0;
+}
+
+#announcements li {
+  list-style: none;
+  margin-bottom: 16px;
+}
+
+#announcements p {
+  margin: 6px 0;
+}
+
+#announcements time {
+  font-weight: normal;
+  margin-right: 12px;
+}
+
+#announcements p:first-child {
+  font-weight: bold;
+  padding-left: 20px;
+  background-image: url(/images/announcement-icon.png);
+  background-position: 0 3px;
+  background-repeat: no-repeat;
+  background-size: 14px 14px;
+  margin-bottom: 11px;
 }
 
 #install-command {
@@ -93,13 +155,25 @@ li code {
   margin-bottom: 10px;
 }
 
-#api-doc h2 {
+#api-doc section {
+  padding-left: 20px;
+}
+
+#api-doc > h3 {
+  padding-top: 10px;
+  padding-bottom: 5px;
   font-weight: bold;
   font-size: 24px;
+  color: #888;
+}
+
+#api-doc h2 {
+  font-weight: bold;
+  font-size: 29px;
   margin: 40px 0 20px;
 }
 
-#api-doc h3 {
+#api-doc section h3 {
   padding-top: 10px;
   padding-bottom: 5px;
   font-weight: bold;
@@ -112,7 +186,7 @@ li code {
 }
 
 #api-doc h5 {
-  font-size: 14em;
+  font-size: 14px;
   font-weight: bold;
   color: #666;
 }
@@ -129,8 +203,19 @@ a {
   padding-top: 40px;
 }
 
-#api-doc h3:target {
-  padding-top: 80px;
+#api-doc *:target, #page-doc *:target {
+ margin-top: -60px;
+ padding-top: 60px;
+ z-index: -1;
+}
+
+.outlined-img {
+  border: 1px solid #eaeaea;
+  width: 90%;
+}
+
+.current {
+  background: #e0f5ff;
 }
 
 /* logo */
@@ -142,6 +227,7 @@ a {
   padding: 10px 25px;
   width: auto;
   border-left: none;
+  z-index: 1;
 }
 
 #logo .express {
@@ -155,21 +241,31 @@ a {
   display: block;
   font: 4.5em "Helvetica Neue", "Open Sans", sans-serif;
   font-weight: 100;
-  color: #353535;
   margin-bottom: .25em;
 }
 
+#description .express a {
+  color: #353535;
+}
+
+#express-version {
+  font-size: 0.2em;
+  margin-left: 0.5em;
+  color: #259dff !important;
+  font-weight: 400;
+}
+
 #description {
-  margin-bottom: 40px;
+  margin-bottom: 43px;
   -webkit-font-smoothing: antialiased;
 }
 
 #description .description {
   position: relative;
   top: -5px;
-  font: 100 4.2em "Helvetica Neue", "Open Sans", sans-serif;
+  font: 100 4.1em "Helvetica Neue", "Open Sans", sans-serif;
   color: #aeaeae;
-  line-height: .75;
+  line-height: .87;
 }
 
 #description em {
@@ -180,16 +276,23 @@ a {
   margin-left: 5px;
 }
 
+#conference {
+  display: inline;
+  float: right;
+  margin-left: 10px;
+}
+
 #intro {
   margin-left: 5%;
 }
 
-#sponsorship, #sponsorship a {
-  color: #7DBD33;
+#doc-langs {
+  text-align: center;
+  font-size: 12px;
 }
 
-#sponsorship h3 {
-  color: #08592B;
+#doc-langs p {
+  margin: 3px 0;
 }
 
 header {
@@ -208,6 +311,14 @@ header {
   box-shadow: 0 0 4px #eee;
 }
 
+/* companies using express */
+
+img.memberlogo {
+  vertical-align: middle;
+  width: 240px;
+  padding: 10px 20px;
+}
+
 /* code */
 
 p code, td code {
@@ -215,14 +326,13 @@ p code, td code {
 }
 
 pre {
-  color: #666;
+  color: #555;
   font-size: 14px;
   line-height: 1.4;
-  background: white;
-  border: 1px solid #eee;
   padding: 16px;
   border-radius: 3px;
-  overflow: scroll;
+  overflow: auto;
+  border: 1px solid #ddd;
 }
 
 pre code {
@@ -356,24 +466,23 @@ html[xmlns] .clearfix {
 
 /* doc specific */
 
-.doctable {
+.doctable, section table {
   margin: 1em 1em 1em 0;
-  border: 1px solid #d8d8d8;
+  border: 1px solid #c6c6c6;
   border-collapse: collapse;
-  background-color: #f4f3f3;
-  empty-cells:show;
+  empty-cells: show;
   width: 100%;
 }
 
-.doctable td, .doctable th {
+.doctable td, .doctable th, section table td, section table th {
   padding: 7px;
   line-height: 120%;
   vertical-align: top;
-  border-color: #d8d8d8;
+  border: 1px solid #c6c6c6;
 }
 
-.doctable tr th {
-  background-color: #D8D8D8;
+.doctable tr th, section table tr th {
+  background-color: #dadada;
   font-size: 110%;
 }
 
@@ -389,7 +498,6 @@ html[xmlns] .clearfix {
   margin: 20px 0
 }
 
-
 /* doc boxes */
 
 .doc-box {
@@ -400,13 +508,42 @@ html[xmlns] .clearfix {
   margin: 20px 3% 20px 3%;
 }
 
+.doc-box pre {
+  font-size: 12px;
+  line-height: 14px;
+  padding: 0;
+  margin: 0;
+}
+
 .doc-box p {
-  margin: 0 0 6px 0;
+  margin: 0 0 8px 0;
 }
 
 .doc-box p:last-child {
   margin: 0;
 }
+
+.doc-box pre[class*="language-"] {
+  background: none repeat scroll 0 0 #fff;
+}
+
+/* English pages use backticks for code blocks */
+.en-doc .page pre[class*="language-"] {
+  padding-top: 10px !important;
+}
+
+/* Non-English pages use pre and code tags for code blocks */
+.non-en-doc .page pre[class*="language-"] {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+
+.page pre.plain-text, .page code.plain-text {
+  padding-top: 0 !important;
+  color: #000;
+}
+
 
 .doc-notice {
   background: #faf6e8;
@@ -423,7 +560,24 @@ html[xmlns] .clearfix {
   border: 1px solid #e2d3d3;
 }
 
+#i18n-notice-box {
+  margin-top: 100px;
+  position: relative;
+}
+
+#close-i18n-notice-box {
+  position: absolute;
+  top: 3px;
+  right: 4px;
+  color: #550000;
+  cursor: pointer;
+}
+
 /* general */
+
+#app-settings-property {
+  width: 200px;
+}
 
 .button {
   display: block;
@@ -443,7 +597,7 @@ html[xmlns] .clearfix {
 
 #nav-button {
   position: absolute;
-  left: 5%;
+  left: 16px;
 }
 
 pre, code {
@@ -451,12 +605,12 @@ pre, code {
 }
 
 #strongloop-header {
-  font-size: 0.6em;
+  font-size: 0.7em;
   display: block;
   position: absolute;
   right: 2%;
   top: 11px;
-  width: 120px;
+  width: 150px;
   border-radius: 3px;
   color: #08592B;
   padding: 3px;
@@ -464,12 +618,14 @@ pre, code {
 
 footer {
   font-size: 11px;
-  margin: 30px 0 30px 0;
+  margin: 60px 10px 30px 10px;
+  padding-left: 5%;
+  max-width: 1090px;
 }
 
 #footer-content {
   display: table;
-  margin: 0 auto;
+  margin: 20px auto 0;
 }
 
 #footer-content div {
@@ -480,10 +636,18 @@ footer {
   padding-bottom: 4px;
 }
 
-#sponsor {
-  background-image: url(/images/strongloop-logo.png);
-  background-size: 20px 16px;
-  padding-left: 25px;
+#github {
+  margin-right: 5px !important;
+}
+
+#license {
+  text-align: center;
+  margin-top: -5px;
+}
+
+#license img {
+  position: relative;
+  top: 3px;
 }
 
 #fork {
@@ -494,12 +658,12 @@ footer {
 
 @media only screen and (-moz-min-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3/2), only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-devicepixel-ratio: 1.5), only screen and (min-resolution: 1.5dppx) {
 
-  #sponsor {
-    background-image: url(/images/strongloop-logo@2x.png);
-  }
-
   #fork {
     background-image: url(/images/fork-icon@2x.png);
+  }
+
+  #announcements p:first-child {
+    background-image: url(/images/announcement-icon@2x.png);
   }
 
 }
@@ -507,15 +671,21 @@ footer {
 /* navigation */
 
 #navbar {
-  padding-left: 10%;
-  max-width: 1193px;
+  padding-left: 5%;
+  width: 1000px;
+  height: 100%;
   position: relative;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  top: 15px;
+  box-sizing: content-box;
 }
 
 #navbar a {
   color: #666;
-  margin: 0 5px;
-  padding-right: 15px;
+  padding-left: 20px;
+  -webkit-font-smoothing: subpixel-antialiased;
 }
 
 #navbar a.active {
@@ -529,10 +699,7 @@ footer {
 #navmenu {
   padding: 0;
   margin: 0;
-  position: absolute;
-  right: 183px;
-  top: 15px;
-  padding-left: 5%;
+  right: 0px;
   z-index: 1000;
 }
 
@@ -576,12 +743,18 @@ footer {
 #menu {
   position: fixed;
   margin: 0;
-  padding: 0;
-  top: 105px;
+  padding: 0 10px 0 0;
+  top: 90px;
   right: 30px;
   height: 500px;
   text-align: right;
   font-size: 13px;
+  overflow-y: auto;
+}
+
+#menu em {
+  font-weight: bold;
+  color: #888;
 }
 
 #menu li {
@@ -590,7 +763,7 @@ footer {
 
 #menu ul {
   height: 0;
-  overflow-y: hidden;
+  overflow: hidden;
 }
 
 #menu ul.active {
@@ -600,32 +773,63 @@ footer {
 #menu > li > a {
   color: #353535;
   font-weight: bold;
+  font-size: 15px;
 }
 
 #menu ul a {
   color: #555;
+  padding-right: 7px;
 }
 
 #menu ul a.active {
   color: #259dff;
 }
 
-
-
-
-
-
-
+h2 a {
+  color: #353535 !important;
+}
 
 /* responsive */
 
 @media all and (max-width: 899px) {
 
-  pre code {
-    word-break: break-all;
+  #conference a img {
+    width: 150px;
+    margin-right: 10px;
   }
 
-  td code {
+  #home-content {
+    flex-direction: column;
+  }
+
+  #install-command {
+    display: none;
+  }
+
+  #home-content .pane {
+    min-width: auto;
+    font-size: 74%;
+  }
+
+  #homepage-leftpane {
+    padding-top: 0px;
+  }
+
+  #homepage-rightpane {
+    padding-top: 0;
+    padding-right: 0;
+  }
+
+  .table-scroller {
+    width: 100%;
+    overflow: scroll;
+  }
+
+  #api-doc section {
+    padding-left: 0;
+  }
+
+  code {
     word-break: break-all;
   }
 
@@ -683,6 +887,7 @@ footer {
   #description .description {
     font-size: 3em;
     line-height: .9em;
+    font-weight: 200;
   }
 
   #install-command {
@@ -729,6 +934,7 @@ footer {
 
   #navbar {
     padding: 0;
+    top: 1px;
   }
 
   #navbar a {
@@ -823,10 +1029,45 @@ footer {
     color: #666 !important;
   }
 
+  footer {
+    margin: 60px 0px 30px 0px;
+    padding: 0 5%;
+  }
+
+  #footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #footer-content div {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    white-space: nowrap;
+  }
+
+  #footer-content div#sponsor {
+    display: block;
+  }
+
+  #doc-langs {
+    font-size: 11px;
+  }
+
 }
 
 
 @media all and (max-width: 420px) {
+
+  #conference {
+    display:none;
+  }
+
+  #app-settings-property {
+    width: auto;
+  }
 
   #strongloop-header {
     display: none;
@@ -837,11 +1078,10 @@ footer {
   }
 
   footer {
-    margin: 0;
+    margin-top: 14px;
   }
 
   #footer-content {
-    display: block;
     margin-left: 5%;
   }
 
@@ -849,8 +1089,9 @@ footer {
     clear: both;
   }
 
-  #sponsor {
-    margin-top: 30px;
+  #footer-content div:nth-child(4) {
+    white-space: pre-line;
+    text-align: center;
   }
 
   #fork {
@@ -867,6 +1108,63 @@ footer {
   #install-command {
     font-size: 12px;
   }
-
 }
 
+@media print {
+
+  header {
+    position: absolute;
+  }
+
+  #mobile-menu {
+    display:none;
+  }
+}
+
+/* For image callouts in writing-middleware.md  */
+
+.callout {position: relative;}
+
+#mw-fig { padding: 0; border: 0; width: 960px; margin-bottom: 20px;}
+#mw-fig-imgcell {margin: 0; padding: 0px; border: 0; width: 410px;}
+#mw-fig-img {margin: 0px; padding: 0px; width: 410px; height: 308px;}
+.mw-fig-callouts {margin: 0; padding: 0 0 0 5px; border: 0; width: 550px;}
+
+/* For middleware pages */
+
+/*
+#mw-list {
+  float: left;
+  width: 180px;
+  margin: 0;
+  padding: 0 10px 0 10px;
+  font-size: 13px;
+ }
+
+#middleware {
+  min-width: 300px;
+}
+*/
+
+#mw-container {
+  display: flex;
+  display: -webkit-flex; /* Safari */
+  width: 100%;
+}
+
+#mw-list {
+  min-width: 180px;
+  margin: 0;
+  padding: 0 10px 0 10px;
+  font-size: 13px;
+  overflow-y: auto;
+ }
+
+#middleware {
+  /* flex: 0.85; */
+  margin-left: 10px;
+}
+
+#mw-list ul li {
+ margin-left: -20px;
+}
